@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Autor: José Antonio Herrera Peña -->
+    <h:head>
+        <title>Descubrimientos</title>
+        <h:outputStylesheet library="css" name="estilo.css"  />
+        <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="Ir a Tesoros" type="submit" action="#{comentariosBean.irATesoros()}" />
+            <h:commandButton value="Ir a Comentarios" type="submit" action="#{comentariosBean.irAComentarios()}" />
+        </h:form>
+        <center>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Descubrimientos de #{comentariosBean.tesoro.nombre}"/></h1>
+                <h:dataTable id="cuadroTabla" value="#{comentariosBean.listaDescubrimientos}" var="item" border="1" width="50%">
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                         <center><h:outputText value="#{item.usuario.nick}"/></center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Descubrimiento"/>
+                        </f:facet>
+                        <center><h:outputText value="#{item.fechaDescubrimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText></center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Kms Recorridos"/>
+                        </f:facet>
+                        <center><h:outputText value="#{item.kmRecorridos}  kms"/></center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dificultad"/>
+                        </f:facet>
+                        <center><h:outputText value="#{tesorosBean.devolverDificultadString(item.dificultad)}"/></center>
+                    </h:column>
+                    
+                </h:dataTable>
+            </h:form>
+        </f:view>
+            
+            
+               
+            <h:form rendered="${comentariosBean.mostrarFormularioDescubrimiento()==true}" id="addDesc">
+                <div id="cuadroRespuestaMarron">
+                <b>Codigo Seguridad: </b><h:inputText value="#{comentariosBean.codSegDesc}" /><p></p>
+                <b>Kms: </b><h:inputText id="kms" value="#{comentariosBean.kmDesc}" /><p></p>
+                <b>Dificultad: </b><h:inputText id="dificutad" value="#{comentariosBean.dificultadDesc}" /><p></p>
+                <h:commandButton value="A&ntilde;adir" type="submit" action="#{comentariosBean.addDescubrimiento()}" />
+                </div>
+            </h:form>
+            <h:form rendered="${comentariosBean.yaDescubierto()==true}" id="yadescubierto">
+                <h3><h:outputText value="Has descubierto este tesoro"/></h3>
+            </h:form>
+            <h:form rendered="${comentariosBean.tesoroEsEscondidoPorUsuario()==true}" id="escondidoporti">
+                <h3><h:outputText value="Has escondido este tesoro"/></h3>
+            </h:form>
+            
+            
+        </center>
+
+
+
+    </h:body>
+</html>
+

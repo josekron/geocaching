@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Autor: José Antonio Herrera Peña -->
+   <h:head>
+        <title>Tesoro</title>
+        <h:outputStylesheet library="css" name="estilo.css"  />
+        <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+      
+        <h:form>
+            <h:commandButton value="Ir a Tesoros" type="submit" action="#{comentariosBean.irATesoros()}" />
+        </h:form>
+        <center>
+            <h3><h:outputText value="#{comentariosBean.tesoro.nombre}"/></h3>
+            <table id="cuadroTesoro">           
+                <tr>
+                    <td  align="center"><b>Descripci&oacute;n</b></td>
+                <td  align="left"><h:outputText value="#{comentariosBean.tesoro.descripcion}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Localizaci&oacute;n</b></td>
+                <td  align="left"><h:outputText value="#{comentariosBean.tesoro.latitud},#{comentariosBean.tesoro.longitud}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Zona</b></td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.tesoro.zona}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Fecha Escondido</b></td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.tesoro.fechaEscondido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Dificultad</b></td>
+                <td  align="left"><h:outputText value="#{tesorosBean.devolverDificultadString(comentariosBean.tesoro.dificultad)}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Encontrado</b></td>
+                    <td  align="left"><h:outputText value="#{tesorosBean.devolverSiTesoroDescubierto(comentariosBean.tesoro.idTesoro)}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Estado</b></td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.tesoro.estado}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Tama&ntilde;o</b></td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.tesoro.tamanio}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center"><b>Escondido por</b></td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.tesoro.usuarioidUsuario.nick}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center">
+                        <h:form id="irDescubrimientos">
+                            <h:commandLink value="Descubrimientos" type="submit" action="#{comentariosBean.irADescubrimientos()}">
+                            </h:commandLink>
+                        </h:form>
+                    </td>
+                    <td  align="left"><h:outputText value="#{comentariosBean.numDescubrimientos}"/></td>
+                </tr>
+                <tr>
+                    <td  align="center">
+                        <h:form id="borrarTesoro">
+                            <h:commandLink rendered="${comentariosBean.devolverSiEscondioTesoroOAdmin()==true}" value="Borrar" type="submit" action="#{comentariosBean.irABorrar()}">
+                            </h:commandLink>
+                        </h:form>
+                    </td>
+                    <td  align="left"></td>
+                </tr>
+                <tr>
+                    <td  align="center">
+                        <h:form id="informarProblema">
+                            <h:commandButton value="Informar sobre problema" type="submit" action="#{comentariosBean.irATesoros}">
+                            </h:commandButton>
+                        </h:form>
+                    </td>
+                    <td  align="left"></td>
+                </tr>
+            </table>
+        </center>
+        <center>
+        <f:view>
+            <h:form>
+                <p></p>
+                <h:dataTable value="#{comentariosBean.listaComentarios}" var="item" border="1" width="60%">
+                    <h:column >
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                        <center><b>Nick:</b><h:outputText value="#{item.usuarioidUsuario.nick}"/><p></p>
+                        <b>Rango:</b><h:outputText value="#{item.usuarioidUsuario.rango}"/>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Comentario"/>
+                        </f:facet>
+                        <b><h:outputText value="#{item.titulo}"/></b><p></p>
+                        <h:outputText value="#{item.texto}"/><p></p>
+                        <i><h:outputText rendered="${item.fechaUltModificacion!=null}" value="&Uacute;ltima modificaci&oacute;n:">
+                            </h:outputText>
+                        <h:outputText rendered="${item.fechaUltModificacion!=null}" value="#{item.fechaUltModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText></i>
+                        <p></p>
+                        
+                            <h:commandLink rendered="${comentariosBean.usuario.rol==2}" value="Eliminar" type="submit" action="#{comentariosBean.eliminarComentario(item.idComentario)}">
+                            </h:commandLink>
+                        <h:outputText value="   "/>
+                        <h:commandLink rendered="${comentariosBean.devolverSiComentarioDeUsuarioOAdmin(item.usuarioidUsuario.idUsuario, item.usuarioidUsuario.rol)==true}" value="Editar" type="submit" action="#{comentariosBean.irAEditarComentario(item.idComentario, item.texto, item.titulo)}">
+                            </h:commandLink>
+                        
+                    </h:column>                  
+                </h:dataTable>
+            </h:form>
+        </f:view>
+            <div id="cuadroRespuestaMarron">
+            <h:form id="responderC">
+                <b>Titulo: </b><h:inputText id="tituloC" value="#{comentariosBean.tituloComentar}" /><p></p>
+                <h:inputTextarea id="textArea"
+                rows="5" cols="60"
+                value="#{comentariosBean.textoComentar}"/>
+                <h:commandButton value="Responder" type="submit" action="#{comentariosBean.addComentario()}" />
+            </h:form>
+            </div>
+    </center>
+        
+    </h:body>
+</html>
+

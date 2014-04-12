@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Crear nuevo aviso</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link href="./../../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <script src="./../../resources/bootstrap/js/jquery.js"></script>
+        <script src="./../../resources/bootstrap/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body style="background-color:#BCF5A9">
+        <div class="container" >
+            <div class="page-header">
+                <h1>Crear Nuevo Aviso</h1>
+            </div>
+
+
+
+            <div class="text-center">
+
+                <h:form>
+                    <div class="row">
+                        <div class="span6">   
+                            Título: <h:inputText value="#{avisosBean.titulo}"/>
+                        </div>
+                        <div class="span6">
+                            Destinatario: 
+                            <h:selectOneMenu id="list1" required="true" value="#{avisosBean.nickUsuarioReceptor}">
+                                <f:selectItems value="#{avisosBean.listaUsuarios}" var="c"
+                                               itemLabel="Nick:#{c.nick} - Nombre:#{c.nombre}" itemValue="${c.nick}" />
+                            </h:selectOneMenu>
+                        </div>
+
+                    </div>
+                    <br/>
+                    Texo:<br/> <h:inputTextarea value="#{avisosBean.mensaje}" rows="8"/><br/>
+
+                    <h:commandButton value="Enviar" action="#{avisosBean.enviarAviso()}"/>
+
+
+                </h:form>
+
+            </div>
+
+
+        </div>
+    </h:body>
+</html>
+

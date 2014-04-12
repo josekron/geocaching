@@ -1,0 +1,82 @@
+/* 
+    Document   : estilo
+    Created on : 02-nov-2013, 17:13:08
+    Author     : Rios
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+    
+html{
+    background-image: radial-gradient(ellipse closest-side at center, #FFFFFF 0%, #AEDD94 100%);
+}
+#centro{
+    border-style: solid;
+    border-bottom-color: #5e9655;
+    border-width: 1px;
+    background-image: radial-gradient(ellipse closest-side at center, #FFFFFF 0%, #dbc59e 100%);
+    height: available;
+    width: border-box;
+}
+
+#cuadroMarron{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #dbc59e;
+    width: 350px;
+    text-align: center;
+}
+
+#cuadroRespuestaMarron{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #dbc59e;
+    width: 600px;
+    height: 140px;
+    text-align: left;
+}
+
+#cuadroTesoro{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #dbc59e;
+    border: 2px #a47e3c;
+    border-color: #000000;
+    border-style: solid;
+    width: 450px;
+    text-align: left;
+    width:50%;
+}
+table{
+    
+    border: 1px #a47e3c;
+    background-color:#dbc59e;
+    
+}
+#cuadroTabla{
+    width: 80%;
+}
+
+
+IMG.logo {
+    display: block;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#formulario{
+    border: 1px #a47e3c;
+    background-color:#dbc59e;
+    width:30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.aliniarDerecha {
+ text-align : right;
+}
+

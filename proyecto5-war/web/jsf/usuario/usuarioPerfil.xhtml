@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+        <title>Datos del usuario</title> 
+        <!--<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <script src="../../bootstrap/js/jquery.js"></script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>-->
+
+        <h:outputStylesheet library="css" name="estilo.css"  />
+    </h:head >
+    <h:body>
+        <div class="text-center">
+            <center> <h2>Datos del usuario</h2></center>
+            <br/>
+            <br/>
+            <h:form id="FormularioMostrarDatos" class="form-horizontal">
+                <table align="center" width="55%">
+                    <tr>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="nombre">Nombre:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="nombre" value="#{usuarioBean.nombre}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="apellidos">Apellidos:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="apellidos" value="#{usuarioBean.apellidos}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="nick">Nick:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="nick" value="#{usuarioBean.nick}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="pass">Contraseña:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="pass" value="#{usuarioBean.pass}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="email">Email:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="email" value="#{usuarioBean.email}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="fechaNacimiento">Fecha Nacimiento:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="fechaN" value="#{usuarioBean.fechaN}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="fechaRegistro">Fecha Registro:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="fechaR" value="#{usuarioBean.fechaR}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="ciudad">Ciudad:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="ciudad" value="#{usuarioBean.ciudad}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="rango">Rango:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="rango" value="#{usuarioBean.rango}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                        <div class="control-group"> 
+                            <td>
+
+                                <label class="control-label" for="rol">Rol:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="rol" value="#{usuarioBean.rolS}" disabled="true" />
+                                </div>
+                            </td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div class="control-group"> 
+                            <!--<td>
+
+                                ! <label class="control-label" for="Equipo">Equipo:</label>
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    <h:inputText id="equipo" value="#{usuarioBean.equipoS}" disabled="true" />
+                                </div>
+                            </td>-->
+                            <td>
+                                <label class="control-label" for="Equipo"> </label>
+                            </td>
+                               <label class="control-label" for="Equipo"> </label>
+                            <td>
+                                
+                            </td>
+                        </div>
+                    </tr>                 
+                </table>
+
+                <table align="center" width="55%">
+                    <tr>
+                        <td><br/><br/>
+                            <div class="row">
+                                <div class="offset2 span3"><h:commandButton class="btn btn-primary" action="#{usuarioBean.modificarUsuario()}" value="Modificar datos" > </h:commandButton></div>         
+                            </div>
+                        </td>
+                        <td><br/><br/>
+                            <div class="row">
+                                <div class="offset2 span3"><h:commandButton class="btn" action="#{usuarioBean.volver()}" value="Volver" ></h:commandButton> </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </h:form>
+        </div>
+        <br/>
+    </h:body>
+</html>

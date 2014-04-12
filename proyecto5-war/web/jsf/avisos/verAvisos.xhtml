@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Avisos de mis tesoros</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link href="./../../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <script src="./../../resources/bootstrap/js/jquery.js"></script>
+        <script src="./../../resources/bootstrap/js/bootstrap.min.js"></script>
+
+
+        <script>
+
+            function abrirModal(id) {
+                document.getElementById("comparativaSeleccionada").value = id;
+                $('#modalVer').modal('show');
+            }
+
+        </script> 
+
+
+    </h:head>
+    <h:body style="background-color:#BCF5A9">
+
+        <div class="container" >
+            <div class="page-header">
+                <h1>Mis avisos</h1>
+            </div>
+
+
+
+            <div class="text-center">
+
+                <h:form>
+
+
+                    <h:dataTable value="#{verAvisosBean.listaAvisos}" var="datos" class=" table-condensed table table-hover table-bordered" >
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Título"/></center>
+                            </f:facet>
+                            <center><h:outputText value="#{datos.titulo}"/></center>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Emisor"/></center>
+                            </f:facet>
+                            <center><h:outputText value="#{datos.usuario.nick}"/></center>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Fecha"/></center>
+                            </f:facet>
+                            <center><h:outputText value="#{datos.fechaEnviado}"/></center>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Marcar Leido"/></center>
+                            </f:facet>
+                            <center><h:commandLink class="btn" action="#{verAvisosBean.marcarLeido()}" rendered="#{!datos.leido}">
+                                    <f:setPropertyActionListener value="#{datos}" target="#{verAvisosBean.leido}"/>
+                                    <i class="icon-check"></i>
+                                </h:commandLink></center>
+                            <center><h:commandLink class="btn btn-primary" action="#{verAvisosBean.desmarcarLeido()}" rendered="#{datos.leido}">
+                                    <f:setPropertyActionListener value="#{datos}" target="#{verAvisosBean.leido}"/>
+                                    <i class="icon-check"></i>
+                                </h:commandLink></center>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Leer"/></center>
+                            </f:facet>
+                            <center><h:commandLink class="btn" action="#{ctrFacturacion.verFacturaIn()}">
+                                    <f:setPropertyActionListener value="#{datos}" target="#{ctrFacturacion.facturaSelec}"/>
+                                    <i class="icon-eye-open"></i>
+                                </h:commandLink></center>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Contestar"/></center>
+                            </f:facet>
+                            <center><h:commandLink class="btn" action="#{ctrFacturacion.verFacturaIn()}">
+                                    <f:setPropertyActionListener value="#{datos}" target="#{ctrFacturacion.facturaSelec}"/>
+                                    <i class="icon-share-alt"></i>
+                                </h:commandLink></center>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Eliminar"/></center>
+                            </f:facet>
+                            <center><h:commandLink class="btn btn-danger" action="#{ctrFacturacion.verFacturaIn()}">
+                                    <f:setPropertyActionListener value="#{datos}" target="#{ctrFacturacion.facturaSelec}"/>
+                                    <i class="icon-trash"></i>
+                                </h:commandLink></center>
+                        </h:column>
+                    </h:dataTable>
+
+
+
+                    <br/>
+
+                    <h:commandButton class="btn" value="Ir a página principal" action="/jsf/principal.jsf"/>
+
+
+                </h:form>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Modal -->
+        <div id="modalVer" class="modal hide fade in" style="display: none;">
+            <div class="modal-header">
+                <a data-dismiss="modal" class="close">×</a>
+                <h3>${msg['vercomparativa']}</h3>
+            </div>
+            <div class="modal-body">
+
+                <h4>${msg['id']}: <h:outputText id="idVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.idcomparativa}"/></h4>
+
+                <h4>${msg['creadopor']}: <h:outputText id="controladorVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.controladorUsuarioIdusuario.usuario.nombre}"/>
+                    <h:outputText id="jefeVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.jefeUsuarioIdusuario.usuario.nombre}"/></h4>
+
+                <H4>${msg['diferenciasver']}:</H4> <h:outputText id="diferenciasVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.diferencias}"/> 
+
+                <H4>${msg['comentario']}: <h:outputText id="comentarioVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.comentario}"/> </H4>
+
+                <H4>${msg['compania']}: <h:outputText id="companiaVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.facturaOutidfacturaOut.compania}"/></H4>
+                <H4>${msg['idfacturain']}: <h:outputText id="facturainVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.facturaInidfacturaIn.idfacturaIn}"/> </H4>
+                <H4>${msg['idfacturaout']}: <h:outputText id="facturaoutVer" class="text-info" value="#{ctrGestionComparativas.comparativaSelec.facturaOutidfacturaOut.idfacturaOut}"/> </H4>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="#" data-dismiss="modal" class="btn">${msg['cerrar']}</a>
+            </div>
+        </div>
+
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+        <title>Isertar Tesoro</title> 
+        <!--<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <script src="../../bootstrap/js/jquery.js"></script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>-->
+
+        <h:outputStylesheet library="css" name="estilo.css"  />
+    </h:head >
+
+    <h:body>
+        <div class="text-center">
+            <center> <h2>Insertar tesoro</h2></center>
+            <br/>
+            <br/>
+
+            <h:form id="FormularioInsertarTesoro" class="form-horizontal">
+                <table align="center" width="59%" >
+                    <tr>
+                        <td >
+                            <label class="control-label" for="nombre">Nombre:</label>
+                        </td>
+
+                        <td>
+                            <h:inputText id="nombre" value="#{gestionTesoroBean.nombre}"/>
+                        </td>
+
+                        <td>
+                            <label class="control-label" for="tamano">Tamaño:</label>
+                        </td>
+
+                        <td>   
+                            <h:selectOneMenu id="tamano" value="#{gestionTesoroBean.tamano}">
+                                <f:selectItem itemValue="#" itemLabel="Tamaño..."></f:selectItem>
+                                <f:selectItem itemValue="Pequeno" itemLabel="Pequeño"></f:selectItem>
+                                <f:selectItem itemValue="Mediano" itemLabel="Mediano"></f:selectItem>
+                                <f:selectItem itemValue="Grande" itemLabel="Grande"></f:selectItem>
+                            </h:selectOneMenu>
+
+                        </td>
+                    </tr>
+
+                    <tr>                       
+
+                        <td><br/>
+                            <label class="control-label" for="zona">Zona:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:inputText id="zona" value="#{gestionTesoroBean.zona}" />
+                        </td>
+
+
+                        <td><br/>
+                            <label class="control-label" for="latitud">Latitud:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:inputText id="latitud" value="#{gestionTesoroBean.latitud}" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><br/>
+                            <label class="control-label" for="logitud">Longitud:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:inputText id="logitud" value="#{gestionTesoroBean.longitud}" />
+                        </td>
+
+                        <td><br/>
+                            <label class="control-label" for="dificultad">Dificultad:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:selectOneMenu id="dificultad" value="#{gestionTesoroBean.dificultadS}">
+                                <f:selectItem itemValue="#" itemLabel="Dificultad..."></f:selectItem>
+                                <f:selectItem itemValue="1" itemLabel="*"></f:selectItem>
+                                <f:selectItem itemValue="2" itemLabel="**"></f:selectItem>
+                                <f:selectItem itemValue="3" itemLabel="***"></f:selectItem>
+                                <f:selectItem itemValue="4" itemLabel="****"></f:selectItem>
+                                <f:selectItem itemValue="5" itemLabel="*****"></f:selectItem>
+                            </h:selectOneMenu>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><br/>
+                            <label class="control-label" for="codSeguridad">Codigo:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:inputText id="codSeguridad" value="#{gestionTesoroBean.codSeguridad}" />
+                        </td>
+
+                        <td><br/>
+                            <label class="control-label" for="fechaEscondido">Fecha:</label>
+                        </td>
+
+                        <td><br/>
+                            <h:inputText id="fechaEscondido" value="#{gestionTesoroBean.fechaString}" />
+                        </td>
+                    </tr>
+
+                    <tr>                    
+                        <td><br/>
+                            <label class="control-label" for="descripcion">Descripcion:</label>
+                        </td>
+
+                        <td>
+                            <h:inputTextarea cols="30" rows="10" id="descripcion" value="#{gestionTesoroBean.descripcion}"/>
+                        </td>
+
+                        <td><br/>
+                            <label class="control-label" for="zona"> </label>
+                        </td>
+
+                        <td><br/>
+                            <label class="control-label" for="zona"> </label>
+                        </td>
+                    </tr>   
+                </table>
+
+                <table align="center" width="59%">
+                    <tr>
+                        <td><br/><br/>
+                            <div class="row">
+                                <div class="offset2 span3"><h:commandButton class="btn btn-primary" action="#{gestionTesoroBean.insertarTesoro()}" value="Insertar" > </h:commandButton></div>         
+                            </div>
+                        </td>
+                        <td><br/><br/>
+                            <div class="row">
+                                <div class="offset2 span3"><h:commandButton class="btn" action="#{gestionTesoroBean.volver()}" value="Volver" ></h:commandButton> </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+        <br/>
+    </h:body>
+</html>

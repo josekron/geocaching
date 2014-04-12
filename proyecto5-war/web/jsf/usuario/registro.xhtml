@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Autor: Enrique Rios Santos -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Nuevo Usuario</title>
+        <h:outputStylesheet library="css" name="estilo.css"  />
+        <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="../../bootstrap/js/jquery.js"></script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <center><h1><h:outputText value="Formulario de Registro"/></h1></center>
+        <f:view>
+            <div id="formulario">
+            <h:form>
+                <h:panelGrid columns="2" columnClasses="aliniarDerecha">
+                    <f:event listener="#{registro.validadorRegistro}" type="postValidate" />
+                    <h:outputLabel value="* Nombre:" for="nombre" />
+                    <h:inputText id="nombre" value="#{registro.nombre}" title="Nombre" required="true" requiredMessage="Es necesario un nombre"/>
+                    <h:outputLabel value="* Apellidos:" for="apellidos" />
+                    <h:inputText id="apellidos" value="#{registro.apellidos}" title="Apellidos" required="true" requiredMessage="Es necesario los apellidos"/>
+                    <h:outputLabel value="* Nick:" for="nick" />
+                    <h:inputText id="nick" value="#{registro.nick}" title="Nick" required="true" requiredMessage="Es necesario un nick"/>
+                    <h:outputLabel value="* Contrase&ntilde;a:" for="pass" />
+                    <h:inputSecret id="pass" value="#{registro.pass}" title="Pass" required="true" requiredMessage="Es necesario introducir una contrase&ntilde;a"/>
+                    <h:outputLabel value="* Confirmar Contrase&ntilde;a:" for="pass" />
+                    <h:inputSecret id="passConfirm" required="true" requiredMessage="Es necesario introducir una contrase&ntilde;a"/>
+                    <h:outputLabel value="* Email:" for="email" />
+                    <h:inputText id="email" value="#{registro.email}" title="Email" required="true" requiredMessage="Es necesario un email"/>
+                    <h:outputLabel value="Fecha de Nacimiento (dd/mm/yyyy):" for="fechaNacimiento" />
+                    <h:inputText id="fechaNacimiento" value="#{registro.fechaNacimiento}" title="FechaNacimiento" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="Ciudad:" for="ciudad" />
+                    <h:inputText id="ciudad" value="#{registro.ciudad}" title="Ciudad" />
+                    <h:commandButton value="Registrarse" type="submit" action="#{registro.enviarRegistro()}"/>
+                    <h:commandButton value="Limpiar Formulario" type="reset" action="#{registro.limpiarFormulario()}"/>
+                </h:panelGrid>
+            </h:form>
+                <h:form>
+                    <h:commandButton value="Volver a Login" type="submit" action="#{registro.irLogin()}" />
+                </h:form>
+                </div>
+        </f:view>
+
+    </h:body>
+</html>
+

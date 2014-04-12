@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Pagina Principal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link href="/proyecto5-war/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <!--><script src="/proyecto5-war/resources/bootstrap/js/jquery.js"></script><!-->
+        <script src="/proyecto5-war/resources/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/proyecto5-war/resources/bootstrap/js/alert.js" />
+        
+    </h:head>
+    <h:body style="background-color:#BCF5A9">
+        <div class="container" >
+            <div class="page-header">
+                <h1>Pagina Principal</h1>
+            </div>
+            <div class="container-fluid" style="background-color:#58FA82">
+                <div class="row-fluid">
+                    <div class="span2 pagination-centered" style="background-color:#F5DA81">
+                        <h4>#{principalBean.usuario.nick}</h4>
+                        <img src="/proyecto5-war/resources/imagenes/avatar.PNG" class="img-rounded"/>                        
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Usuario</li>
+                            <li class="active"><a href="#">Inicio</a></li>
+                            <li ><a href="/proyecto5-war/jsf/tesoros/tesoros.jsf">Tesoros</a></li>
+                            <li ><a href="/proyecto5-war/jsf/usuario/usuarioPerfil.jsf">Mi Perfil</a></li>
+                            <li ><a href="/proyecto5-war/jsf/avisos/crearAviso.jsf">Avisar a Usuario</a></li>
+                            <li ><a href="/proyecto5-war/jsf/avisos/verAvisos.jsf">Mostrar Avisos</a></li>
+                            <h:panelGroup rendered="#{principalBean.usuario.rol > 0}">
+                                <li class="nav-header">Colaborador</li>   
+                                <li ><a href="/proyecto5-war/jsf/tesoros/tesoroAlta.jsf">Insertar tesoro</a></li>
+                                <li ><a href="/proyecto5-war/jsf/tesoros/tesoroValidar.jsf">Validar tesoro</a></li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{principalBean.usuario.rol > 1}">
+                                <li class="nav-header">Administrador</li>
+                                <li ><a href="/proyecto5-war/jsf/usuario/administrarUsuarios.jsf">Administrar Usuarios</a></li>
+                            </h:panelGroup>
+
+                            <li class="divider"></li>
+                            <li ><a href="/proyecto5-war/index.jsf">Salir</a></li>
+                        </ul>                  
+                    </div>
+                    <div class="span10 pagination-centered">
+                        <h:panelGroup rendered="#{principalBean.avisosNoLeidos.size() > 1}">
+                            <div id="aviso" class="alert">
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>Atención!</strong> Tienes #{principalBean.avisosNoLeidos.size()} avisos sin leer. <a href="/proyecto5-war/jsf/avisos/verAvisos.jsf">Mostrar</a>
+                            </div>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{principalBean.avisosNoLeidos.size() == 1}">
+                            <div id="aviso" class="alert">
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>Atención!</strong> Tienes #{principalBean.avisosNoLeidos.size()} aviso sin leer. <a href="/proyecto5-war/jsf/avisos/verAvisos.jsf">Mostrar</a>
+                            </div>
+                        </h:panelGroup>
+                        <div  style="background-color:#F5DA81">
+                            <h2>Tesoros Encontrados</h2>
+                        </div>
+                        <div  style="background-color:#CEF6D8">
+                            <h:form>
+                                <h:dataTable value="#{principalBean.descubrimientos}" var="item" styleClass="table table-condensed table-bordered table-hover">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:commandLink value="#{item.tesoro.nombre}"  
+                                                       action="#{tesorosBean.irAComentarioTesoro(item.tesoro.idTesoro)}" >
+                                        </h:commandLink>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Descripcion</f:facet>
+                                        <h:outputText value="#{item.tesoro.descripcion}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Localizacion</f:facet>
+                                        <h:outputText value="#{item.tesoro.longitud}, #{item.tesoro.latitud}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Zona</f:facet>
+                                        <h:outputText value="#{item.tesoro.zona}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Fecha encontrado</f:facet>
+                                        <h:outputText value="#{item.fechaDescubrimiento}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Dificultad</f:facet>
+                                        <h:outputText value="#{item.dificultad}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Estado</f:facet>
+                                        <h:outputText value="#{item.tesoro.estado}" />
+                                    </h:column>
+                                </h:dataTable> 
+                            </h:form>
+                        </div>
+                        <h:panelGroup rendered="#{principalBean.usuario.rol > 1}">
+                            <div  style="background-color:#F5DA81">
+                                <h2>Tesoros Escondidos</h2>
+                            </div>
+
+                            <div style="background-color:#CEF6D8" >
+                                <h:form >
+                                    <h:dataTable value="#{principalBean.tesorosEscondidos}" var="item" styleClass="table table-condensed table-bordered table-hover">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Nombre"/>
+                                            </f:facet>
+                                            <h:commandLink value="#{item.nombre}"  
+                                                           action="#{tesorosBean.irAComentarioTesoro(item.idTesoro)}" >
+                                            </h:commandLink>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Descripcion</f:facet>
+                                            <h:outputText value="#{item.descripcion}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Localizacion</f:facet>
+                                            <h:outputText value="#{item.longitud}, #{item.latitud}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Zona</f:facet>
+                                            <h:outputText value="#{item.zona}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Fecha escondido</f:facet>
+                                            <h:outputText value="#{item.fechaEscondido}" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Dificultad</f:facet>
+                                            <h:outputText value="#{item.dificultad}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Encontrado</f:facet>
+                                            <h:outputText value="#{item.descubrimientoList.size()}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Estado</f:facet>
+                                            <h:outputText value="#{item.estado}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </div>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

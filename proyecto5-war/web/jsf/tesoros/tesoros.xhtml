@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+<!-- Autor: José Antonio Herrera Peña -->
+
+    <h:head>
+        <title>Tesoros Disponibles</title>
+        <h:outputStylesheet library="css" name="estilo.css"  />
+        <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="../../bootstrap/js/jquery.js"></script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="Ir a Principal" type="submit" action="#{tesorosBean.irAPrincipal()}" />
+        </h:form>
+        <h3><u>Filtro avanzado</u></h3>
+        <h:form id="busquedaAvanzadaTesoros">
+            Nombre:<h:inputText id="nombreBusqueda" value="#{tesorosBean.nombreBusqueda}" />
+            Zona:<h:inputText id="zonaBusqueda" value="#{tesorosBean.zonaBusqueda}" />
+            <h:outputText
+                value="Encontrado: "/>
+            <h:selectOneMenu id="selectEncontrado"
+                             value="#{tesorosBean.opEcontrado}">
+             <f:selectItems
+                 value="#{tesorosBean.listaOpEncontrado}" /> 
+             </h:selectOneMenu> 
+            <h:outputText
+                value="Dificultad: "/>
+            <h:selectOneMenu id="selectDificultad"
+                             value="#{tesorosBean.dificultadBusqueda}">
+             <f:selectItems
+                 value="#{tesorosBean.listaDificultad}" />
+            </h:selectOneMenu> 
+            <p></p>
+            Ordenar seg&uacute;n tu posici&oacute;n (Latitud,Longitud):
+            <h:inputText id="distBusquedaX" value="#{tesorosBean.longBusquedaX}" />
+            <h:inputText id="distBusquedaY" value="#{tesorosBean.longBusquedaY}" />
+            <p><h:commandButton value="Filtrar" type="submit" action="#{tesorosBean.recogerDatosBusquedaTesoros()}" />
+            <h:commandButton value="Resetear Lista" type="submit" action="#{tesorosBean.resetearListaTesoros()}" /></p> 
+        </h:form>
+        <center>
+        <f:view>
+            <h:form>
+  
+                <h1><h:outputText value="Lista de Tesoros Disponibles"/></h1>
+                <h:dataTable id="cuadroTabla" value="#{tesorosBean.devolverListaTesoros()}" var="item" border="1" width="80%">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <center><h:commandLink value="#{tesorosBean.recortarCadenaString(item.nombre,30)}"  
+                                       action="#{tesorosBean.irAComentarioTesoro(item.idTesoro)}" >
+                        </h:commandLink>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descripci&oacute;n"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{tesorosBean.recortarCadenaString(item.descripcion,25)}"/>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Localizaci&oacute;n"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{item.latitud},#{item.longitud}"/>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Zona"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{item.zona}"/>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Escondido"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{item.fechaEscondido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dificultad"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{tesorosBean.devolverDificultadString(item.dificultad)}"/>
+                        </center>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{item.estado}"/>
+                        </center>
+                    </h:column>  
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Encontrado"/>
+                        </f:facet>
+                        <center>
+                        <h:outputText value="#{tesorosBean.devolverSiTesoroDescubierto(item.idTesoro)}"/>
+                        </center>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        </center>
+        
+        
+    </h:body>
+</html>
+
